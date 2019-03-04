@@ -1,0 +1,18 @@
+﻿@model CharacteristicTypeSelectListViewModel
+@{
+    ViewData["Title"] = "Redigera attributlista-attribut";
+}
+<partial name="_TitlePartial" />
+<form asp-action="CreateCharacteristicTypeSelectList" method="post">
+    <input type="hidden" asp-for="CharacteristicTypeSelectList.Id" />
+    <div class="form-group">
+        <label>Välj attributlista:</label>
+        <select asp-for="CharacteristicTypeSelectList.CharacteristicTypeId" asp-items="Model.CharacteristicTypes" class="form-control" required></select>
+    </div>
+    <div class="form-group">
+        <label>Värde på attributlista-attribut:</label>
+        <input asp-for="CharacteristicTypeSelectList.Value" class="form-control" required />
+    </div>
+    <button class="btn btn-primary" type="submit">Spara</button>
+    <a asp-action="ListCharacteristicTypeSelectLists" class="btn btn-secondary">Avbryt</a>
+</form>

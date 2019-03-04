@@ -1,0 +1,28 @@
+﻿@model SubCategoryCharacteristicGroupViewModel
+@{
+    ViewData["Title"] = $"Välj attributgrupper för underkategorin \"{Model.SubCategoryName}\"";
+}
+<partial name="_TitlePartial" />
+<form asp-controller="category" asp-action="EditSubCategoryCharacteristicGroups" method="post">
+    <input type="hidden" asp-for="SubCategoryId" name="subCategoryId" />
+    <input type="hidden" id="characteristicGroupsToAdd" name="characteristicGroupsToAdd" />
+    <div class="form-group">
+        @foreach (var x in Model.CharacteristicGroups)
+        {
+            <div class="custom-control custom-checkbox">
+                @if (Model.SelectedCharacteristicGroups.Contains(x.Id))
+                {
+                    <input type="checkbox" class="custom-control-input" id="@x.Id" value="@x.Id" checked="checked">
+                }
+                else
+                {
+                    <input type="checkbox" class="custom-control-input" id="@x.Id" value="@x.Id">
+                }
+                <label class="custom-control-label" for="@x.Id">@x.Name</label>
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary" id="characteristicGroupsToAddButton">Spara</button>
+    <a asp-action="ListSubCategories" class="btn btn-secondary">Avbryt</a>
+</form>
+<script src="~/js/editSubCategoryCharacteristicGroups.min.js"></script>

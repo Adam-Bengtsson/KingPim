@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KingPim.Web", "KingPim.Web\KingPim.Web.csproj", "{B88F83EE-F683-44B0-AEF3-C584778181D3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6328BD58-835A-4E56-8706-8929BEAB379C} = {6328BD58-835A-4E56-8706-8929BEAB379C}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KingPim.Models", "KingPim.Models\KingPim.Models.csproj", "{6328BD58-835A-4E56-8706-8929BEAB379C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KingPim.DataAccess", "KingPim.DataAccess\KingPim.DataAccess.csproj", "{F5CFFBC3-9CC9-4245-8A4D-8317CB15E503}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KingPim.Repositories", "KingPim.Repositories\KingPim.Repositories.csproj", "{449402A7-511F-488F-B3F6-AB5E4ABF52B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KingPim.Infrastructure", "KingPim.Infrastructure\KingPim.Infrastructure.csproj", "{C603D169-FD23-4A54-990D-1B0E83307AEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B88F83EE-F683-44B0-AEF3-C584778181D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B88F83EE-F683-44B0-AEF3-C584778181D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B88F83EE-F683-44B0-AEF3-C584778181D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B88F83EE-F683-44B0-AEF3-C584778181D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6328BD58-835A-4E56-8706-8929BEAB379C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6328BD58-835A-4E56-8706-8929BEAB379C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6328BD58-835A-4E56-8706-8929BEAB379C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6328BD58-835A-4E56-8706-8929BEAB379C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5CFFBC3-9CC9-4245-8A4D-8317CB15E503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CFFBC3-9CC9-4245-8A4D-8317CB15E503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CFFBC3-9CC9-4245-8A4D-8317CB15E503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CFFBC3-9CC9-4245-8A4D-8317CB15E503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{449402A7-511F-488F-B3F6-AB5E4ABF52B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449402A7-511F-488F-B3F6-AB5E4ABF52B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449402A7-511F-488F-B3F6-AB5E4ABF52B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449402A7-511F-488F-B3F6-AB5E4ABF52B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C603D169-FD23-4A54-990D-1B0E83307AEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C603D169-FD23-4A54-990D-1B0E83307AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C603D169-FD23-4A54-990D-1B0E83307AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C603D169-FD23-4A54-990D-1B0E83307AEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56A12E86-7A44-4A14-928F-7735973A2F0A}
+	EndGlobalSection
+EndGlobal

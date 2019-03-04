@@ -1,0 +1,21 @@
+﻿@model LoginViewModel
+@{
+    Layout = "_LoginLayout";
+    ViewData["Title"] = "KingPim: Logga in";
+}
+<h5>Logga in</h5>
+<hr />
+<partial name="_AlertSuccessInfoPartial" />
+<form asp-action="Login" method="post">
+    <label>E-postadress:</label>
+    <input asp-for="Email" class="form-control" placeholder="E-postadress" required autofocus>
+    <br />
+    <label>Lösenord:</label>
+    <input asp-for="Password" class="form-control" placeholder="Lösenord" required>
+    <br />
+    <button class="btn btn-primary" type="submit">Logga in</button>
+</form>
+<footer>
+    <hr />
+    <i><a asp-action="ForgotUserPassword">Glömt lösenord</a></i>
+</footer>

@@ -1,0 +1,13 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Skapa ny kategori";
+}
+<partial name="_TitlePartial" />
+<form asp-action="CreateCategory" method="post">
+    <div class="form-group">
+        <label>Namn på kategori:</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+    <button class="btn btn-primary" type="submit">Spara</button>
+    <a asp-action="ListCategories" class="btn btn-secondary">Avbryt</a>
+</form>

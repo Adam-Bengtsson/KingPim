@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Characteristic>
+@{
+    ViewData["Title"] = $"Attribut i attributgruppen \"{Model.FirstOrDefault()?.CharacteristicGroup.Name}\"";
+}
+<a asp-action="CreateCharacteristic" class="btn btn-primary"><img src="~/images/add.svg" />Skapa nytt attribut</a>
+<br /><br />
+<partial name="_TitlePartial" />
+<table class="table table-responsive-lg table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Attribut</th>
+            <th>Datatyp</th>
+            <th>Version</th>
+            <th>Skapad</th>
+            <th>Uppdaterad</th>
+            <th>Redigera</th>
+            <th>Ta bort</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var characteristic in Model)
+        {
+            <tr>
+                <td>@characteristic.Name</td>
+                <td>@characteristic.CharacteristicType.Name</td>
+                <td>@characteristic.Version</td>
+                <td>@characteristic.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                <td>@characteristic.UpdatedDate?.ToString("yyyy-MM-dd HH:mm:ss") av @characteristic.UpdatedBy</td>
+                <td><a asp-action="EditCharacteristic" asp-route-characteristicId="@characteristic.Id" class="btn btn-sm btn-primary"><img src="~/images/edit.svg">Redigera</a></td>
+                <td><form asp-action="DeleteCharacteristic" onsubmit="return confirm('Är du säker?')" method="post"><input type="hidden" name="characteristicId" value="@characteristic.Id" /><button type="submit" class="btn btn-danger btn-sm"><img src="~/images/delete.svg" />Ta bort</button></form></td>
+            </tr>
+        }
+    </tbody>
+</table>

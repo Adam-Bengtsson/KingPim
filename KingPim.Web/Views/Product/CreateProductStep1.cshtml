@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Välj kategori att skapa produkt i";
+}
+<partial name="_TitlePartial" />
+<ul>
+    @foreach (var category in Model)
+    {
+        <li><a asp-action="CreateProductStep2" asp-route-categoryId="@category.Id">@category.Name</a></li>
+    }
+</ul>
+<a asp-action="ListProducts" class="btn btn-secondary">Avbryt</a>

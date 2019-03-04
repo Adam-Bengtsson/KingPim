@@ -1,0 +1,36 @@
+﻿.navbar img {
+  height: 16px;
+  margin-right: 4px;
+  margin-bottom: 4px; }
+
+.btn img {
+  height: 16px;
+  margin-right: 4px;
+  margin-bottom: 4px; }
+
+.btn {
+  margin-bottom: 4px; }
+
+.navbar-dark .navbar-nav .nav-link.active {
+  color: lightblue; }
+
+.dropdown-item.active {
+  color: black;
+  background-color: white; }
+
+.field-validation-error {
+  color: #f00; }
+
+.field-validation-valid {
+  display: none; }
+
+.input-validation-error {
+  border: 1px solid #f00;
+  background-color: #fee; }
+
+.validation-summary-errors {
+  font-weight: bold;
+  color: #f00; }
+
+.validation-summary-valid {
+  display: none; }

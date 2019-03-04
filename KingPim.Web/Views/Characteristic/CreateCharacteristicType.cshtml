@@ -1,0 +1,13 @@
+﻿@model CharacteristicType
+@{
+    ViewData["Title"] = "Skapa ny attributlista";
+}
+<partial name="_TitlePartial" />
+<form asp-action="CreateCharacteristicType" method="post">
+    <div class="form-group">
+        <label>Namn på attributlista:</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+    <button class="btn btn-primary" type="submit">Spara</button>
+    <a asp-action="ListCharacteristicTypes" class="btn btn-secondary">Avbryt</a>
+</form>

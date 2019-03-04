@@ -1,0 +1,15 @@
+﻿@model CharacteristicGroup
+@{
+    ViewData["Title"] = "Redigera attributgrupp";
+}
+<partial name="_TitlePartial" />
+<form asp-action="EditCharacteristicGroup" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Version" />
+    <div class="form-group">
+        <label>Namn på attributgrupp:</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+    <button class="btn btn-primary" type="submit">Spara</button>
+    <a asp-action="ListCharacteristicGroups" class="btn btn-secondary">Avbryt</a>
+</form>

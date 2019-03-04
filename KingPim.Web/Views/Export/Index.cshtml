@@ -1,0 +1,57 @@
+﻿@model ExportViewModel
+@{
+    ViewData["Title"] = "Export";
+}
+<h5>Exportera produktträdet</h5>
+<hr />
+Ladda ner hela produktträdet som <a href="api/json/product" download>Json-fil</a> eller som <a href="/api/xml/product" download>XML-fil</a>
+<hr />
+<h5>Exportera produkter från kategori</h5>
+<hr />
+<ul>
+    @foreach (var category in Model.Categories)
+    {
+        <li>
+            Ladda ner produkter från kategorin "@category.Name" som <a href="api/json/product/category/@category.Id" download>Json-fil</a> eller som <a href="/api/xml/product/category/@category.Id" download>XML-fil</a>
+        </li>
+    }
+</ul>
+<hr />
+<h5>Exportera produkter från underkategori</h5>
+<hr />
+<ul>
+    @foreach (var subcategory in Model.SubCategories)
+    {
+        <li>
+            Ladda ner produkter från subkategorin "@subcategory.Name" som <a href="api/json/product/subcategory/@subcategory.Id" download>Json-fil</a> eller som <a href="/api/xml/product/subcategory/@subcategory.Id" download> XML-fil</a>
+        </li>
+    }
+</ul>
+<hr />
+<h5>Exportera kategori</h5>
+<hr />
+<ul>
+    <li>
+        Ladda ner alla kategorier som <a href="api/json/category" download>Json-fil</a> eller som <a href="/api/xml/category" download>XML-fil</a>
+    </li>
+    @foreach (var category in Model.Categories)
+    {
+        <li>
+            Ladda ner kategorin "@category.Name" som <a href="api/json/category/@category.Id" download>Json-fil</a> eller som <a href="/api/xml/category/@category.Id" download>XML-fil</a>
+        </li>
+    }
+</ul>
+<hr />
+<h5>Exportera underkategori</h5>
+<hr />
+<ul>
+    <li>
+        Ladda ner alla subkategorierna som <a href="api/json/category" download>Json-fil</a> eller som <a href="/api/xml/category" download>XML-fil</a>
+    </li>
+    @foreach (var subcategory in Model.SubCategories)
+    {
+        <li>
+            Ladda ner subkategorin "@subcategory.Name" som <a href="api/json/subcategory/@subcategory.Id" download>Json-fil</a> eller som <a href="/api/xml/subcategory/@subcategory.Id" download> XML-fil</a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SubCategory>
+@{
+    ViewData["Title"] = $"Underkategorier i kategorin \"{Model.FirstOrDefault()?.Category.Name}\"";
+}
+<a asp-action="CreateSubCategory" class="btn btn-primary"><img src="~/images/add.svg" />Skapa ny underkategori</a>
+<br /><br />
+<partial name="_TitlePartial" />
+<table class="table table-responsive-lg table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Underkategori</th>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+            {
+                <th colspan="2">Publicerad</th>
+            }
+            else
+            {
+                <th>Publicerad</th>
+            }
+            <th>Version</th>
+            <th>Skapad</th>
+            <th>Uppdaterad</th>
+            <th>Redigera</th>
+            <th>Välj attributgrupper</th>
+            <th>Ta bort</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subCategory in Model)
+        {
+                <tr>
+                    <td>@subCategory.Name</td>
+                    @if (subCategory.Published == true)
+                    {
+                        <td>
+                            <label>Ja</label>
+                        </td>
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                        {
+                            <td><form asp-action="PublishSubCategory" method="post"><input type="hidden" name="subCategoryId" value="@subCategory.Id" /><input type="hidden" name="changePublishedValueTo" value="false" /><button type="submit" class="btn btn-primary btn-sm"><img src="~/images/edit.svg" />Avpublicera</button></form></td>
+                        }
+                    }
+                    else
+                    {
+                        <td><label>Nej</label></td>
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                        {
+                            <td><form asp-action="PublishSubCategory" method="post"><input type="hidden" name="subCategoryId" value="@subCategory.Id" /><input type="hidden" name="changePublishedValueTo" value="true" /><button type="submit" class="btn btn-primary btn-sm"><img src="~/images/edit.svg" />Publicera</button></form></td>
+                        }
+                    }
+                    <td>@subCategory.Version</td>
+                    <td>@subCategory.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@subCategory.UpdatedDate?.ToString("yyyy-MM-dd HH:mm:ss") av @subCategory.UpdatedBy</td>
+                    <td><a asp-action="EditSubCategory" asp-route-subCategoryId="@subCategory.Id" class="btn btn-sm btn-primary"><img src="~/images/edit.svg">Redigera</a></td>
+                    <td><a asp-action="EditSubCategoryCharacteristicGroups" asp-route-subCategoryId="@subCategory.Id" class="btn btn-sm btn-primary"><img src="~/images/edit.svg">Välj attributgrupper</a></td>
+                    <td><form asp-action="DeleteSubCategory" onsubmit="return confirm('Är du säker?')" method="post"><input type="hidden" name="subCategoryId" value="@subCategory.Id" /><button type="submit" class="btn btn-danger btn-sm"><img src="~/images/delete.svg" />Ta bort</button></form></td>
+                </tr>
+        }
+    </tbody>
+</table>

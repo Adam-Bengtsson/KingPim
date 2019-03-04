@@ -1,0 +1,23 @@
+﻿@model CharacteristicViewModel
+@{
+    ViewData["Title"] = "Redigera attribut";
+}
+<partial name="_TitlePartial" />
+<form asp-action="EditCharacteristic" method="post">
+    <input type="hidden" asp-for="Characteristic.Id" />
+    <input type="hidden" asp-for="Characteristic.Version" />
+    <div class="form-group">
+        <label>Välj attributgrupp:</label>
+        <select asp-for="Characteristic.CharacteristicGroupId" asp-items="Model.CharacteristicGroups" class="form-control" required></select>
+    </div>
+    <div class="form-group">
+        <label>Namn på attribut:</label>
+        <input asp-for="Characteristic.Name" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Välj datatyp:</label>
+        <select asp-for="Characteristic.CharacteristicTypeId" asp-items="Model.CharacteristicTypes" class="form-control" required></select>
+    </div>
+    <button class="btn btn-primary" type="submit">Spara</button>
+    <a asp-action="ListCharacteristics" class="btn btn-secondary">Avbryt</a>
+</form>

@@ -1,0 +1,19 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Redigera produkt";
+}
+<partial name="_TitlePartial" />
+<form asp-action="EditProduct" method="post">
+    <input type="hidden" asp-for="Product.Id" />
+    <input type="hidden" asp-for="Product.Version" />
+    <div class="form-group">
+        <label>Välj kategori / underkategori:</label>
+        <select asp-for="Product.SubCategoryId" asp-items="Model.SubCategories" class="form-control" required></select>
+    </div>
+    <div class="form-group">
+        <label>Namn på produkt:</label>
+        <input asp-for="Product.Name" class="form-control" required />
+    </div>
+    <button class="btn btn-primary" type="submit">Spara</button>
+    <a asp-action="ListProducts" class="btn btn-secondary">Avbryt</a>
+</form>

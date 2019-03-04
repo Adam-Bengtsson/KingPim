@@ -1,0 +1,29 @@
+﻿@model List<ListUserViewModel>
+@{
+    ViewData["Title"] = "Alla användare";
+}
+<partial name="_AlertSuccessInfoPartial" />
+<a asp-action="CreateUser" class="btn btn-primary"><img src="~/images/add.svg" />Skapa ny användare</a>
+<br /><br />
+<partial name="_TitlePartial" />
+<table class="table table-responsive-lg table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Användarnamn</th>
+            <th>Roller</th>
+            <th>E-post</th>
+            <th>Ta bort</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@{ var commaSeparatedRoles = String.Join(",", user.Roles); }@commaSeparatedRoles</td>
+                <td>@user.Email</td>
+                <td><form asp-action="DeleteUser" onsubmit="return confirm('Är du säker?')" method="post"><input type="hidden" name="userName" value="@user.UserName" /><button type="submit" class="btn btn-danger btn-sm"><img src="~/images/delete.svg" />Ta bort</button></form></td>
+            </tr>
+        }
+    </tbody>
+</table>

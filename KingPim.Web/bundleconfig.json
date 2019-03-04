@@ -1,0 +1,21 @@
+[
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "node_modules/jquery/dist/jquery.min.js",
+      "node_modules/bootstrap/dist/js/bootstrap.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/fixNavbarActive.min.js",
+    "inputFiles": [
+      "wwwroot/js/fixNavbarActive.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/editSubCategoryCharacteristicGroups.min.js",
+    "inputFiles": [
+      "wwwroot/js/editSubCategoryCharacteristicGroups.js"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+﻿@model SubCategoryViewModel
+@{
+    ViewData["Title"] = "Redigera underkategori";
+}
+<partial name="_TitlePartial" />
+<form asp-action="EditSubCategory" method="post">
+    <input type="hidden" asp-for="SubCategory.Id" />
+    <input type="hidden" asp-for="SubCategory.Version" />
+    <div class="form-group">
+        <label>Välj kategori:</label>
+        <select asp-for="SubCategory.CategoryId" asp-items="Model.Categories" class="form-control" required></select>
+    </div>
+    <div class="form-group">
+        <label>Namn på underkategori:</label>
+        <input asp-for="SubCategory.Name" class="form-control" required />
+    </div>
+    <button class="btn btn-primary" type="submit">Spara</button>
+    <a asp-action="ListSubCategories" class="btn btn-secondary">Avbryt</a>
+</form>

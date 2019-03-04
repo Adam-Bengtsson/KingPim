@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="sv-se">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>KingPim: @ViewBag.Title</title>
+    <link rel="icon" type="image/x-icon" href="~/Images/favicon.ico" />
+    <script src="~/js/site.min.js"></script>
+    <link href="~/css/style.min.css" rel="stylesheet" />
+    <link href="~/css/custom-style.min.css" rel="stylesheet" />
+    <script src="~/js/fixNavbarActive.min.js"></script>
+</head>
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" asp-controller="Product" asp-action="ListProducts"><img src="~/images/KingPim_Logo.png" />KingPim</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Product" asp-action="ListProducts" ><img src="~/images/products.svg" />Produkter</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/category" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="~/images/categories.svg" />Kategorier
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-controller="Category" asp-action="ListCategories">Kategorier</a>
+                            <a class="dropdown-item" asp-controller="Category" asp-action="ListSubCategories">Underkategorier</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/characteristic" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="~/images/attributes.svg" />Attribut
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-controller="Characteristic" asp-action="ListCharacteristicGroups">Attributgrupper</a>
+                            <a class="dropdown-item" asp-controller="Characteristic" asp-action="ListCharacteristics">Attribut</a>
+                            <a class="dropdown-item" asp-controller="Characteristic" asp-action="ListCharacteristicTypes">Attributlistor</a>
+                            <a class="dropdown-item" asp-controller="Characteristic" asp-action="ListCharacteristicTypeSelectLists">Attributlista-attribut</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Export" asp-action="Index" ><img src="~/images/export.svg" />Export</a>
+                    </li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="ListUsers"><img src="~/images/users.svg" />Användare</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a asp-controller="Login" asp-action="Logout" class="nav-link"><img src="~/images/logout.svg" />Logga ut</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container-fluid">
+            <br />
+            @RenderBody()
+        </div>
+    </main>
+    <footer>
+        <hr />
+        <div class="container-fluid">
+            <i>Inloggad som: @await Component.InvokeAsync("ShowLoggedInUser")<br /><a asp-controller="User" asp-action="ChangeUserPassword">Ändra lösenord</a></i>
+        </div>
+    </footer>
+</body>
+</html>

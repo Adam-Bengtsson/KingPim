@@ -1,0 +1,62 @@
+﻿@model ListProductsViewModel
+@{
+    ViewData["Title"] = $"Produkter i underkategorin \"{Model.SelectedSubCategory}\" i kategorin \"{Model.SelectedCategory}\"";
+}
+<a asp-action="CreateProductStep1" class="btn btn-primary"><img src="~/images/add.svg" />Skapa ny produkt</a>
+<br /><br />
+<partial name="_TitlePartial" />
+<table class="table table-responsive-lg table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Produkt</th>
+            @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+            {
+                <th colspan="2">Publicerad</th>
+            }
+            else { <th>Publicerad</th>
+            }
+            <th>Kategori</th>
+            <th>Underkategori</th>
+            <th>Version</th>
+            <th>Skapad</th>
+            <th>Uppdaterad</th>
+            <th>Redigera</th>
+            <th>Redigera attribut</th>
+            <th>Ta bort</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                @if (product.Published == true)
+                {
+                    <td>
+                        <label>Ja</label>
+                    </td>
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                    {
+                        <td><form asp-action="PublishProduct" method="post"><input type="hidden" name="productId" value="@product.Id" /><input type="hidden" name="changePublishedValueTo" value="false" /><button type="submit" class="btn btn-primary btn-sm"><img src="~/images/edit.svg" />Avpublicera</button></form></td>
+                    }
+                }
+                else
+                {
+                    <td><label>Nej</label></td>
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                    {
+                        <td><form asp-action="PublishProduct" method="post"><input type="hidden" name="productId" value="@product.Id" /><input type="hidden" name="changePublishedValueTo" value="true" /><button type="submit" class="btn btn-primary btn-sm"><img src="~/images/edit.svg" />Publicera</button></form></td>
+                    }
+                }
+                <td>@product.SubCategory.Category.Name</td>
+                <td>@product.SubCategory.Name</td>
+                <td>@product.Version</td>
+                <td>@product.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                <td>@product.UpdatedDate?.ToString("yyyy-MM-dd HH:mm:ss") av @product.UpdatedBy</td>
+                <td><a asp-action="EditProduct" asp-route-productId="@product.Id" class="btn btn-sm btn-primary"><img src="~/images/edit.svg">Redigera</a></td>
+                <td><a asp-action="EditProductCharacteristicValues" asp-route-productId="@product.Id" class="btn btn-sm btn-primary"><img src="~/images/edit.svg">Redigera attribut</a></td>
+                <td><form asp-action="DeleteProduct" onsubmit="return confirm('Är du säker?')" method="post"><input type="hidden" name="productId" value="@product.Id" /><button type="submit" class="btn btn-danger btn-sm"><img src="~/images/delete.svg" />Ta bort</button></form></td>
+            </tr>
+        }
+    </tbody>
+</table>

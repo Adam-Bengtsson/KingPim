@@ -1,0 +1,72 @@
+﻿@model ProductCharacteristicValueViewModel
+@{
+    ViewData["Title"] = "Redigera attribut";
+}
+<partial name="_TitlePartial" />
+<form asp-controller="product" asp-action="SaveProductCharacteristicValues" method="post">
+    <input type="hidden" asp-for="ProductId" name="productId" />
+    @for (int i = 0; i < Model.Characteristics.Count; i++)
+    {
+    <div class="form-group">
+        @if (i == 0)
+        {
+            <p><b>@Model.CharacteristicGroups.FirstOrDefault(x => x.Id.Equals(@Model.Characteristics[i].CharacteristicGroupId)).Name</b></p>
+        }
+        @if (i != 0 && @Model.Characteristics[i].CharacteristicGroupId != @Model.Characteristics[i - 1].CharacteristicGroupId)
+        {
+            <p><b>@Model.CharacteristicGroups.FirstOrDefault(x => x.Id.Equals(@Model.Characteristics[i].CharacteristicGroupId)).Name</b></p>
+        }
+        @if (Model.Characteristics[i].CharacteristicTypeId == 1)
+        {
+            <label>@Model.Characteristics[i].Name:</label>
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].CharacteristicName" value="@Model.Characteristics[i].Name" />
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].ProductId" value="@Model.ProductId" />
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].CharacteristicId" value="@Model.Characteristics[i].Id" />
+            @if (@Model.ExistingProductCharacteristicValues.Where(x => x.CharacteristicId.Equals(@Model.Characteristics[i].Id)).Any())
+            {
+                <input asp-for="@Model.ProductCharacteristicValues[i].Value" value="@Model.ExistingProductCharacteristicValues.FirstOrDefault(x => x.CharacteristicId.Equals(@Model.Characteristics[i].Id)).Value" class="form-control" required />
+            }
+            else
+            {
+                <input asp-for="@Model.ProductCharacteristicValues[i].Value" class="form-control" required />
+            }
+        }
+        else if (Model.Characteristics[i].CharacteristicTypeId == 2)
+        {
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].CharacteristicName" value="@Model.Characteristics[i].Name" />
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].ProductId" value="@Model.ProductId" />
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].CharacteristicId" value="@Model.Characteristics[i].Id" />
+            <div class="custom-control custom-checkbox">
+                @if (@Model.ExistingProductCharacteristicValues.Where(x => x.CharacteristicId.Equals(@Model.Characteristics[i].Id)).Any() && @Model.ExistingProductCharacteristicValues.FirstOrDefault(x => x.CharacteristicId.Equals(@Model.Characteristics[i].Id)).Value == "true")
+                {
+                    <input type="checkbox" asp-for="@Model.ProductCharacteristicValues[i].Value" id="@Model.Characteristics[i].Id" class="custom-control-input" checked="checked" />
+                }
+                else
+                {
+                    <input type="checkbox" asp-for="@Model.ProductCharacteristicValues[i].Value" id="@Model.Characteristics[i].Id" class="custom-control-input" />
+                }
+                <label class="custom-control-label" for="@Model.Characteristics[i].Id">@Model.Characteristics[i].Name</label>
+            </div>
+        }
+        else
+        {
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].CharacteristicName" value="@Model.Characteristics[i].Name" />
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].ProductId" value="@Model.ProductId" />
+            <input type="hidden" asp-for="@Model.ProductCharacteristicValues[i].CharacteristicId" value="@Model.Characteristics[i].Id" />
+            <div class="form-group">
+                <label>@Model.Characteristics[i].CharacteristicType.Name</label>
+                @if (@Model.ExistingProductCharacteristicValues.Where(x => x.CharacteristicId.Equals(@Model.Characteristics[i].Id)).Any())
+                {
+                    <select asp-for="@Model.ProductCharacteristicValues[i].Value" asp-items="@(new SelectList(Model.CharacteristicTypeSelectLists.Where(x => x.CharacteristicTypeId.Equals(@Model.Characteristics[i].CharacteristicTypeId)), "Value", "Value", @Model.ExistingProductCharacteristicValues.FirstOrDefault(x => x.CharacteristicId.Equals(@Model.Characteristics[i].Id)).Value))" class="form-control" required></select>
+                }
+                else
+                {
+                    <select asp-for="@Model.ProductCharacteristicValues[i].Value" asp-items="@(new SelectList(Model.CharacteristicTypeSelectLists.Where(x => x.CharacteristicTypeId.Equals(@Model.Characteristics[i].CharacteristicTypeId)), "Value", "Value"))" class="form-control" required></select>
+                }
+            </div>
+        }
+    </div>
+    }
+    <button type="submit" class="btn btn-primary">Spara</button>
+    <a asp-action="ListProducts" class="btn btn-secondary">Avbryt</a>
+</form>

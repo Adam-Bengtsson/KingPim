@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CharacteristicGroup>
+@{
+    ViewData["Title"] = "Alla attributgrupper";
+}
+<partial name="_AlertSuccessInfoPartial" />
+<a asp-action="CreateCharacteristicGroup" class="btn btn-primary"><img src="~/images/add.svg" />Skapa ny attributgrupp</a>
+<br /><br />
+<partial name="_TitlePartial" />
+<table class="table table-responsive-lg table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Attributgrupp</th>
+            <th>Version</th>
+            <th>Skapad</th>
+            <th>Uppdaterad</th>
+            <th>Redigera</th>
+            <th>Ta bort</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var characteristicGroup in Model)
+        {
+            <tr>
+                <td>@characteristicGroup.Name</td>
+                <td>@characteristicGroup.Version</td>
+                <td>@characteristicGroup.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                <td>@characteristicGroup.UpdatedDate?.ToString("yyyy-MM-dd HH:mm:ss") av @characteristicGroup.UpdatedBy</td>
+                <td><a asp-action="EditCharacteristicGroup" asp-route-characteristicGroupId="@characteristicGroup.Id" class="btn btn-sm btn-primary"><img src="~/images/edit.svg">Redigera</a></td>
+                <td><form asp-action="DeleteCharacteristicGroup" onsubmit="return confirm('Är du säker?')" ´method="post"><input type="hidden" name="characteristicGroupId" value="@characteristicGroup.Id" /><button type="submit" class="btn btn-danger btn-sm"><img src="~/images/delete.svg" />Ta bort</button></form></td>
+            </tr>
+        }
+    </tbody>
+</table>

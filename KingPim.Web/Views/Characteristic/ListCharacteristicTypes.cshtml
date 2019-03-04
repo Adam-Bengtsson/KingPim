@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CharacteristicType>
+@{
+    ViewData["Title"] = "Alla attributlistor";
+}
+<partial name="_AlertSuccessInfoPartial" />
+<a asp-action="CreateCharacteristicType" class="btn btn-primary"><img src="~/images/add.svg" />Skapa ny attributlista</a>
+<br /><br />
+<partial name="_TitlePartial" />
+<table class="table table-responsive-lg table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Attributlista</th>
+            <th>Redigera</th>
+            <th>Ta bort</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var characteristicType in Model)
+        {
+            <tr>
+                <td>@characteristicType.Name</td>
+                <td><a asp-action="EditCharacteristicType" asp-route-characteristicTypeId="@characteristicType.Id" class="btn btn-sm btn-primary"><img src="~/images/edit.svg">Redigera</a></td>
+                <td><form asp-action="DeleteCharacteristicType" onsubmit="return confirm('Är du säker?')" ´method="post"><input type="hidden" name="characteristicTypeId" value="@characteristicType.Id" /><button type="submit" class="btn btn-danger btn-sm"><img src="~/images/delete.svg" />Ta bort</button></form></td>
+            </tr>
+        }
+    </tbody>
+</table>

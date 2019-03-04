@@ -1,0 +1,17 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = $"Skapa ny produkt i kategorin \"{Model.SelectedCategory}\"";
+}
+<partial name="_TitlePartial" />
+<form asp-action="CreateProductStep2" method="post">
+    <div class="form-group">
+        <label>Välj underkategori:</label>
+        <select asp-for="Product.SubCategoryId" asp-items="Model.SubCategories" class="form-control" required></select>
+    </div>
+    <div class="form-group">
+        <label>Namn på produkt:</label>
+        <input asp-for="Product.Name" class="form-control" required />
+    </div>
+    <button class="btn btn-primary" type="submit">Spara</button>
+    <a asp-action="ListProducts" class="btn btn-secondary">Avbryt</a>
+</form>

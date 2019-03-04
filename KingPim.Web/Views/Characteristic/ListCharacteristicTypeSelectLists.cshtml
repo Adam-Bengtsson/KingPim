@@ -1,0 +1,37 @@
+﻿@model ListCharacteristicTypeSelectListsViewModel
+@{
+    ViewData["Title"] = "Alla attributlista-attribut";
+}
+<partial name="_AlertSuccessInfoPartial" />
+<a asp-action="CreateCharacteristicTypeSelectList" class="btn btn-primary"><img src="~/images/add.svg" />Skapa ny attributlista-attribut</a>
+<br /><br />
+<partial name="_TitlePartial" />
+<ul>
+    @foreach (var characteristicType in Model.CharacteristicsTypes)
+    {
+        <li><a asp-action="ListCharacteristicTypeSelectListsWithCharacteristicTypeFilter" asp-route-characteristicTypeId="@characteristicType.Id">@characteristicType.Name</a></li>
+    }
+</ul>
+<h5>@ViewBag.Title</h5>
+<hr />
+<table class="table table-responsive-lg table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Attributlista-attribut</th>
+            <th>Attributlista</th>
+            <th>Redigera</th>
+            <th>Ta bort</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var characteristicTypeSelectList in Model.CharacteristicTypeSelectLists)
+        {
+            <tr>
+                <td>@characteristicTypeSelectList.Value</td>
+                <td>@characteristicTypeSelectList.CharacteristicType.Name</td>
+                <td><a asp-action="EditCharacteristicTypeSelectList" asp-route-characteristicTypeSelectListId="@characteristicTypeSelectList.Id" class="btn btn-sm btn-primary"><img src="~/images/edit.svg">Redigera</a></td>
+                <td><form asp-action="DeleteCharacteristicTypeSelectList" onsubmit="return confirm('Är du säker?')" ´method="post"><input type="hidden" name="characteristicTypeSelectListId" value="@characteristicTypeSelectList.Id" /><button type="submit" class="btn btn-danger btn-sm"><img src="~/images/delete.svg" />Ta bort</button></form></td>
+            </tr>
+        }
+    </tbody>
+</table>
